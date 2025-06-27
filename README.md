@@ -1,4 +1,4 @@
-# *CNI - Pipeline de extração IPCA Sidra * #
+*CNI - Pipeline de extração IPCA Sidra*
 
 *Automação desenvolvido como critério de avaliação para a posição de Engenheiro de dados.* 
 

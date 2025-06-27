@@ -1,0 +1,60 @@
+
+2. No exemplo do bot que você construiu, o conjunto de dados necessários estava disponível no site diretamente por meio de um link já definido. No entanto como você resolveria o problema da captura dos dados caso fosse necessário antes navegar no site (executando passos e cliques por meio de menus, login, botões, links) para se chegar ao arquivo alvo (se não existisse um link direto para o conjunto de dados). 
+Como resposta para este item, crie um arquivo (txt), disponibilize-o no referido projeto do GitHub e inclua no seu conteúdo um texto explicativo (com suas próprias palavras) que descreva uma proposta de solução.
+
+
+##################################################################
+
+
+
+Proposta de RPA 
+
+Primeiramente temos que verificar as diretrizes de acesso do site , licença de uso para esse tipo de acesso .
+Alguns sites adotam politicas contrárias à esse tipo de acesso.
+
+No nosso caso estamos acessando site cominformações públicas , logo não teremos muitas restrições sobre o acesso via RPA.
+
+Portanto nesse caso , uma vez analisado o site e avaliado as possibilidades temos seguinte proposta.
+
+
+1- Necessidade 
+- Acessar o site https://sidra.ibge.gov.br/home/pms/brasil.
+- Interagir com botões , selecionar campos e efetuar o download de uma planilha em formato .xlsx.
+
+2- Frameworks/Linguagem de programação
+-  Python para desenvolvimento .
+- Bibliotecas sugeridas :
+ > Selenium para interagir com o Site , navegação assistida( simula a ação humana de).
+ > Pandas para poder manipular o arquivo baixado.
+
+obs.: Aqui estamos usando python puro , porém  existem alguns frameworks com a proposta de low code, abaixo cito dois mais conhecidos.
+- UI PATH (link para mais informações : https://www.uipath.com/pt )
+- Power Automate Desktop - Microsoft (link para mais informações : https://learn.microsoft.com/pt-br/power-automate/desktop-flows/getting-started-msa)
+
+3- navegação
+- Acessar o site , através da url definida.
+- Aguardar o carregamento das informações( usando waits para que os objetos iteraveis do site sejam carregados ).
+- Clicar no menu "IPCA".
+- Aguardar o carregamento das informações( usando waits para que os objetos iteraveis do site sejam carregados ).
+- Clicar na lista "LOCAL" , escolher "BRASIL" para carregar a tabelas com as informações consolidadas.
+- Clicar no botão de download "Exportar Tabela".
+- Escolher o formato do arquivo , nesse casos o "XLSX"
+- Aguardar o término do download.
+- Encerrar a sessão
+obs.: Todos esses passos de interação com botões, lista , etc. É necessário conhecimento de html, para inspecionar o site e extrair informações como ID dos botões , classe , nome entre outras .
+Ex:
+btnDownload = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Exportar Tabela']")))
+
+4- Higienização dos Informações e disponibilidade
+- Criar um dataframe no Pandas, usando o arquivo baixado.
+- Remover colunas desnecessárias.
+- Padronizar fonte , colunas.
+- Tipagem dos dados correta.
+- Salver na pasta "OUTPUTS" em formato Parquet.
+
+Esse seriam os passos básicos,uma vez aprovada a proposta , seria necessário alguns outros ajustes para garantir o acesso do RPA e a disponibilidade das informações.
+
+Espero ter conseguido passar a ideia principal.
+
+
+
